@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>oSamu - 现代EPUB阅读器</title>
-    <meta name="description" content="oSamu - 一款基于Readium的跨平台EPUB阅读器，支持MD3风格UI、多色主题和多语言">
+    <title>oSamu - Modern EPUB Reader</title>
+    <meta name="description"
+        content="oSamu - A cross-platform EPUB reader based on Readium with MD3 UI, multiple themes and multilingual support">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/i18n.js"></script>
 </head>
 
 <body>
@@ -18,11 +20,29 @@
                 <span>oSamu</span>
             </div>
             <div class="nav-menu">
-                <a href="#features">功能</a>
-                <a href="#screenshots">截图</a>
-                <a href="#download">下载</a>
-                <a href="#feedback">反馈</a>
-                <button class="theme-toggle" id="themeToggle" title="切换主题">
+                <a href="#features" data-i18n="nav.features">功能</a>
+                <a href="#screenshots" data-i18n="nav.screenshots">截图</a>
+                <a href="#download" data-i18n="nav.download">下载</a>
+                <a href="#feedback" data-i18n="nav.feedback">反馈</a>
+
+                <!-- 语言切换 -->
+                <div class="language-selector">
+                    <button class="lang-toggle" id="langToggle" title="Language">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path
+                                d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="lang-menu" id="langMenu">
+                        <button class="lang-option" data-lang="zh">中文 (Chinese)</button>
+                        <button class="lang-option" data-lang="en">English</button>
+                    </div>
+                </div>
+
+                <button class="theme-toggle" id="themeToggle" data-i18n-title="nav.toggle-theme" title="切换主题">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -44,46 +64,46 @@
         <div class="container">
             <img src="src/icon/ic_launcher_round.webp" alt="oSamu" class="hero-icon">
             <h1>oSamu</h1>
-            <p class="hero-subtitle">现代化的EPUB阅读体验</p>
-            <p class="hero-description">基于Readium的跨平台EPUB阅读器，优雅的界面设计，强大的阅读功能</p>
-            <a href="#download" class="btn btn-primary">立即下载</a>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">现代化的EPUB阅读体验</p>
+            <p class="hero-description" data-i18n="hero.description">基于Readium的跨平台EPUB阅读器，优雅的界面设计，强大的阅读功能</p>
+            <a href="#download" class="btn btn-primary" data-i18n="hero.download">立即下载</a>
         </div>
     </section>
 
     <!-- 功能特性 -->
     <section id="features" class="features">
         <div class="container">
-            <h2>功能特性</h2>
+            <h2 data-i18n="features.title">功能特性</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">📖</div>
-                    <h3>EPUB阅读</h3>
-                    <p>完整支持EPUB2和EPUB3标准，流畅的阅读体验</p>
+                    <h3 data-i18n="features.epub">EPUB阅读</h3>
+                    <p data-i18n="features.epub-desc">完整支持EPUB2和EPUB3标准，流畅的阅读体验</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🎨</div>
-                    <h3>MD3风格UI</h3>
-                    <p>采用Material Design 3设计语言，现代简洁的界面</p>
+                    <h3 data-i18n="features.ui">MD3风格UI</h3>
+                    <p data-i18n="features.ui-desc">采用Material Design 3设计语言，现代简洁的界面</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🌈</div>
-                    <h3>多色主题</h3>
-                    <p>丰富的主题选择，满足个性化需求</p>
+                    <h3 data-i18n="features.theme">多色主题</h3>
+                    <p data-i18n="features.theme-desc">丰富的主题选择，满足个性化需求</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🌍</div>
-                    <h3>多语言支持</h3>
-                    <p>支持多种语言界面，全球用户友好</p>
+                    <h3 data-i18n="features.lang">多语言支持</h3>
+                    <p data-i18n="features.lang-desc">支持多种语言界面，全球用户友好</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📱</div>
-                    <h3>跨平台</h3>
-                    <p>未来将支持多个操作系统平台</p>
+                    <h3 data-i18n="features.platform">跨平台</h3>
+                    <p data-i18n="features.platform-desc">支持多个操作系统平台</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
-                    <h3>高质量渲染</h3>
-                    <p>基于Readium，带来卓越体验</p>
+                    <h3 data-i18n="features.performance">高性能</h3>
+                    <p data-i18n="features.performance-desc">快速加载，流畅的翻页体验</p>
                 </div>
             </div>
         </div>
@@ -92,7 +112,7 @@
     <!-- 截图展示 -->
     <section id="screenshots" class="screenshots">
         <div class="container">
-            <h2>应用截图</h2>
+            <h2 data-i18n="screenshots.title">应用截图</h2>
             <div class="screenshots-gallery">
                 <img src="src/Screenshots/Screenshot_2026-06-14-01-36-34-74.png" alt="oSamu 截图 1" class="screenshot">
                 <img src="src/Screenshots/Screenshot_2026-06-14-01-39-36-31.png" alt="oSamu 截图 2" class="screenshot">
