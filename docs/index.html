@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oSamu - 现代EPUB阅读器</title>
+    <meta name="description" content="oSamu - 一款基于Readium的跨平台EPUB阅读器，支持MD3风格UI、多色主题和多语言">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="../src/icon/ic_launcher_round.webp" alt="oSamu Icon" class="logo">
+                <span>oSamu</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#features">功能</a>
+                <a href="#screenshots">截图</a>
+                <a href="#download">下载</a>
+                <a href="#feedback">反馈</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区 -->
+    <section class="hero">
+        <div class="container">
+            <img src="../src/icon/ic_launcher_round.webp" alt="oSamu" class="hero-icon">
+            <h1>oSamu</h1>
+            <p class="hero-subtitle">现代化的EPUB阅读体验</p>
+            <p class="hero-description">基于Readium的跨平台EPUB阅读器，优雅的界面设计，强大的阅读功能</p>
+            <a href="#download" class="btn btn-primary">立即下载</a>
+        </div>
+    </section>
+
+    <!-- 功能特性 -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>功能特性</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3>EPUB阅读</h3>
+                    <p>完整支持EPUB2和EPUB3标准，流畅的阅读体验</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>MD3风格UI</h3>
+                    <p>采用Material Design 3设计语言，现代简洁的界面</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌈</div>
+                    <h3>多色主题</h3>
+                    <p>丰富的主题选择，满足个性化需求</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>多语言支持</h3>
+                    <p>支持多种语言界面，全球用户友好</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>跨平台</h3>
+                    <p>未来将支持多个操作系统平台</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>高质量渲染</h3>
+                    <p>基于Readium，带来卓越体验</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 截图展示 -->
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <h2>应用截图</h2>
+            <div class="screenshots-gallery">
+                <img src="../src/Screenshots/Screenshot_2026-06-14-01-36-34-74.png" alt="oSamu 截图 1" class="screenshot">
+                <img src="../src/Screenshots/Screenshot_2026-06-14-01-39-36-31.png" alt="oSamu 截图 2" class="screenshot">
+                <img src="../src/Screenshots/Screenshot_2026-06-14-01-40-24-08.png" alt="oSamu 截图 3" class="screenshot">
+                <img src="../src/Screenshots/Screenshot_2026-06-14-02-10-55-63.png" alt="oSamu 截图 4" class="screenshot">
+            </div>
+        </div>
+    </section>
+
+    <!-- 下载 -->
+    <section id="download" class="download">
+        <div class="container">
+            <h2>下载应用</h2>
+            <p>选择适合您的平台</p>
+            <div class="download-buttons">
+                <a href="https://github.com/LoKaisham/oSamu-Release/releases" class="btn btn-primary btn-large">
+                    <span>📥 下载APK</span>
+                    <small>从GitHub Releases</small>
+                </a>
+                <a href="https://github.com/LoKaisham/oSamu-Release" class="btn btn-secondary btn-large">
+                    <span>⭐ GitHub</span>
+                    <small>查看项目</small>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 反馈 -->
+    <section id="feedback" class="feedback">
+        <div class="container">
+            <h2>反馈与建议</h2>
+            <div class="feedback-content">
+                <div class="feedback-card">
+                    <h3>🐛 报告问题</h3>
+                    <p>如果您发现任何问题或BUG，欢迎在GitHub上提交Issue</p>
+                    <a href="https://github.com/LoKaisham/oSamu-Release/issues" class="btn btn-outline">提交Issue</a>
+                </div>
+                <div class="feedback-card">
+                    <h3>💡 功能建议</h3>
+                    <p>您有什么想法或建议？我们非常期待听到您的意见</p>
+                    <a href="https://github.com/LoKaisham/oSamu-Release/discussions" class="btn btn-outline">讨论区</a>
+                </div>
+                <div class="feedback-card">
+                    <h3>❤️ 赞助支持</h3>
+                    <p>如果您喜欢这个应用，可以通过赞助来支持开发</p>
+                    <a href="https://github.com/sponsors/LoKaisham" class="btn btn-outline">赞助我们</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 oSamu. All rights reserved.</p>
+            <p>
+                <a href="https://github.com/LoKaisham/oSamu-Release">GitHub</a> •
+                <a href="https://github.com/LoKaisham/oSamu-Release/issues">问题反馈</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

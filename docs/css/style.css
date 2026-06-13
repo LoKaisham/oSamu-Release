@@ -1,0 +1,501 @@
+/* ============================================
+   全局样式和颜色变量
+   ============================================ */
+:root {
+    --primary: #6750a4;
+    --primary-light: #eaddff;
+    --secondary: #625b71;
+    --tertiary: #7d5260;
+    --background: #fffbfe;
+    --surface: #fff8fd;
+    --surface-dim: #f3eff4;
+    --on-primary: #ffffff;
+    --on-background: #1c1b1f;
+    --on-surface: #1c1b1f;
+    --outline: #79747e;
+
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+}
+
+/* 深色模式 */
+[data-theme="dark"] {
+    --primary: #d0bcff;
+    --primary-light: #381e72;
+    --secondary: #ccc7db;
+    --tertiary: #f2b8d4;
+    --background: #1c1b1f;
+    --surface: #2b2930;
+    --surface-dim: #1c1b1f;
+    --on-primary: #381e72;
+    --on-background: #e6e1e6;
+    --on-surface: #e6e1e6;
+    --outline: #9c9bab;
+}
+
+/* ============================================
+   重置和基础样式
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--background);
+    color: var(--on-background);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+/* ============================================
+   导航栏
+   ============================================ */
+.navbar {
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--outline);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.nav-menu a {
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: var(--primary);
+}
+
+.theme-toggle {
+    background: none;
+    border: 2px solid var(--outline);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--on-surface);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: var(--surface-dim);
+    color: var(--primary);
+}
+
+/* ============================================
+   英雄区
+   ============================================ */
+.hero {
+    padding: var(--spacing-xl) 0;
+    text-align: center;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--background) 100%);
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+}
+
+.hero .container {
+    width: 100%;
+}
+
+.hero-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 40px;
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.hero:hover .hero-icon {
+    transform: translateY(-10px);
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--on-background);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    color: var(--outline);
+    max-width: 600px;
+    margin: 0 auto var(--spacing-lg);
+    line-height: 1.8;
+}
+
+.btn {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--on-primary);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(103, 80, 164, 0.3);
+}
+
+.btn-secondary {
+    background-color: var(--surface-dim);
+    color: var(--on-surface);
+    border: 2px solid var(--outline);
+}
+
+.btn-secondary:hover {
+    background-color: var(--outline);
+    color: var(--on-primary);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-light);
+}
+
+.btn-large {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.btn-large small {
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+/* ============================================
+   功能特性
+   ============================================ */
+.features {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--surface);
+}
+
+.features h2,
+.screenshots h2,
+.download h2,
+.feedback h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    color: var(--on-surface);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.feature-card {
+    background-color: var(--background);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-xl);
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--on-surface);
+}
+
+.feature-card p {
+    color: var(--outline);
+    line-height: 1.6;
+}
+
+/* ============================================
+   截图展示
+   ============================================ */
+.screenshots {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--background);
+}
+
+.screenshots-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.screenshot {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    object-fit: cover;
+    aspect-ratio: 9 / 16;
+}
+
+.screenshot:hover {
+    transform: scale(1.05);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================
+   下载区
+   ============================================ */
+.download {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--surface);
+    text-align: center;
+}
+
+.download>.container>p {
+    font-size: 1.1rem;
+    color: var(--outline);
+    margin-bottom: var(--spacing-lg);
+}
+
+.download-buttons {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--spacing-lg);
+}
+
+/* ============================================
+   反馈区
+   ============================================ */
+.feedback {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--background);
+}
+
+.feedback-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.feedback-card {
+    background-color: var(--surface);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--outline);
+    transition: all 0.3s ease;
+}
+
+.feedback-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-card h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--on-surface);
+}
+
+.feedback-card p {
+    color: var(--outline);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+}
+
+/* ============================================
+   页脚
+   ============================================ */
+.footer {
+    background-color: var(--surface);
+    padding: var(--spacing-lg) 0;
+    text-align: center;
+    border-top: 1px solid var(--outline);
+    color: var(--outline);
+    margin-top: var(--spacing-xl);
+}
+
+.footer p {
+    margin: var(--spacing-sm) 0;
+}
+
+.footer a {
+    color: var(--primary);
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   响应式设计
+   ============================================ */
+@media (max-width: 768px) {
+    .nav-menu {
+        gap: var(--spacing-md);
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .features h2,
+    .screenshots h2,
+    .download h2,
+    .feedback h2 {
+        font-size: 2rem;
+    }
+
+    .features-grid,
+    .feedback-content {
+        grid-template-columns: 1fr;
+    }
+
+    .download-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-large {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar .container {
+        height: auto;
+        flex-direction: column;
+        gap: var(--spacing-md);
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+
+    .nav-menu {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: var(--spacing-lg) 0;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+
+    .screenshots-gallery {
+        grid-template-columns: 1fr;
+    }
+}
