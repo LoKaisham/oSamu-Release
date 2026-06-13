@@ -1,6 +1,8 @@
 # Default ignored files
 /shelf/
+/.idea/
 /workspace.xml
+/docs/Haiku.md
 *.artifacts*
 *.artifact*
 *.xml*
