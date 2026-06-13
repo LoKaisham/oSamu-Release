@@ -1,6 +1,6 @@
-# 删除不可用截图
+# 更新截图路径
 
-仅删除 `index.html` 中不存在的截图链接，保留现有的 CSS 布局（不进行滑动查看的改动）。
+用户移动了图片文件，需要将 `index.html` 中的截图路径从 `../src/Screenshots/` 更改为新的位置 `src/Screenshots/`。
 
 ## Proposed Changes
 
@@ -8,15 +8,10 @@
 
 #### [index.html](file:///C:/Android/oSamuRelease/docs/index.html)
 
-- 删掉不可用的截图链接。
-- 仅保留以下存在的截图：
-  - `Screenshot_2026-06-14-01-36-34-74.png`
-  - `Screenshot_2026-06-14-01-39-36-31.png`
-  - `Screenshot_2026-06-14-01-40-24-08.png`
-  - `Screenshot_2026-06-14-02-10-55-63.png`
-  - `Screenshot_2026-06-14-02-11-32-22.png`
+- 更新 `screenshots-gallery` 中的 `img` 标签 `src` 属性。
+- 路径由 `../src/Screenshots/` 改为 `src/Screenshots/`。
 
 ## Verification Plan
 
 ### Manual Verification
-- 打开 `index.html` 验证是否只显示存在的 5 张截图。
+- 打开 `index.html` 验证截图是否能正常显示。
