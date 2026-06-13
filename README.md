@@ -4,7 +4,7 @@
 
 ## 🌐 访问网站
 
-👉 **[oSamu应用官网](https://LoKaisham.github.io/oSamu-Release/)**
+👉 **[访问Github Pages](https://LoKaisham.github.io/oSamu-Release/)**
 
 网站上提供了详细的应用介绍、功能特性、截图展示和下载链接。
 
@@ -75,7 +75,7 @@
 - ⭐ **Star**这个项目
 - 📢 **分享**给朋友
 - 💬 **反馈**使用体验
-- 💰 **赞助**开发团队
+- 💰 **赞助**开发者
 
 👉 [成为赞助者](https://github.com/sponsors/LoKaisham)
 
