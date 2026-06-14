@@ -1,265 +1,151 @@
 // ============================================
-// 深色模式切换
+// 深色模式切换 (MD3 兼容版)
 // ============================================
 const themeToggle = document.getElementById('themeToggle');
 const htmlElement = document.documentElement;
 
-// 从localStorage读取保存的主题设置
 function initializeTheme() {
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
     const theme = savedTheme || (prefersDark ? 'dark' : 'light');
     setTheme(theme);
 }
 
-// 设置主题
 function setTheme(theme) {
     htmlElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
     updateThemeIcon(theme);
 }
 
-// 更新主题按钮图标
 function updateThemeIcon(theme) {
+    if (!themeToggle) return;
     if (theme === 'dark') {
         themeToggle.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="5"></circle>
-                <path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m2.54 2.54l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m2.54-2.54l4.24-4.24M19.78 19.78l-4.24-4.24m-2.54-2.54l-4.24-4.24"></path>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
             </svg>
         `;
     } else {
         themeToggle.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
         `;
     }
 }
 
-// 主题切换事件
-themeToggle.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-});
-
-// 系统主题变化时自动切换
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    const newTheme = e.matches ? 'dark' : 'light';
-    const savedTheme = localStorage.getItem('theme');
-    if (!savedTheme) {
-        setTheme(newTheme);
-    }
-});
-
 // ============================================
-// 页面加载时初始化
+// 导航栏动态变色
 // ============================================
-document.addEventListener('DOMContentLoaded', () => {
-    initializeTheme();
-    addSmoothScrolling();
-    initScreenshotGallery();
-});
-
-// ============================================
-// 平滑滚动增强（针对不支持scroll-behavior的浏览器）
-// ============================================
-function addSmoothScrolling() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (href !== '#') {
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            }
-        });
-    });
-}
-
-// ============================================
-// 截图库交互
-// ============================================
-function initScreenshotGallery() {
-    const screenshots = document.querySelectorAll('.screenshot');
-
-    screenshots.forEach(screenshot => {
-        screenshot.addEventListener('click', () => {
-            openLightbox(screenshot.src);
-        });
-    });
-}
-
-// 简单的灯箱效果
-function openLightbox(src) {
-    // 创建灯箱容器
-    const lightbox = document.createElement('div');
-    lightbox.className = 'lightbox';
-    lightbox.innerHTML = `
-        <div class="lightbox-content">
-            <button class="lightbox-close">&times;</button>
-            <img src="${src}" alt="Full size screenshot">
-        </div>
-    `;
-
-    // 添加样式
-    if (!document.querySelector('style[data-lightbox]')) {
-        const style = document.createElement('style');
-        style.setAttribute('data-lightbox', 'true');
-        style.textContent = `
-            .lightbox {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: rgba(0, 0, 0, 0.8);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1000;
-                opacity: 0;
-                animation: fadeIn 0.3s ease forwards;
-            }
-
-            @keyframes fadeIn {
-                to {
-                    opacity: 1;
-                }
-            }
-
-            .lightbox-content {
-                position: relative;
-                max-width: 90%;
-                max-height: 90%;
-            }
-
-            .lightbox-content img {
-                width: 100%;
-                height: auto;
-                border-radius: 8px;
-            }
-
-            .lightbox-close {
-                position: absolute;
-                top: -40px;
-                right: 0;
-                background: none;
-                border: none;
-                color: white;
-                font-size: 2rem;
-                cursor: pointer;
-                line-height: 1;
-                transition: opacity 0.3s ease;
-            }
-
-            .lightbox-close:hover {
-                opacity: 0.7;
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    document.body.appendChild(lightbox);
-
-    // 关闭灯箱
-    const closeBtn = lightbox.querySelector('.lightbox-close');
-    closeBtn.addEventListener('click', () => {
-        lightbox.style.opacity = '0';
-        setTimeout(() => lightbox.remove(), 300);
-    });
-
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            lightbox.style.opacity = '0';
-            setTimeout(() => lightbox.remove(), 300);
-        }
-    });
-}
-
-// ============================================
-// 性能优化：图片延迟加载
-// ============================================
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    imageObserver.unobserve(img);
-                }
-            }
-        });
-    });
-
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
-
-// ============================================
-// 导航栏在滚动时的视觉反馈
-// ============================================
-let lastScrollTop = 0;
 const navbar = document.querySelector('.navbar');
 
-window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+function updateNavbarAppearance() {
+    if (!navbar) return;
+    const allSections = document.querySelectorAll('section[id], .hero');
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    let currentSection = null;
 
-    if (scrollTop > 50) {
-        navbar.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.15)';
-    } else {
-        navbar.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+    // 在普通文档流中，从前往后找最后一个其顶部已经过线的
+    allSections.forEach(section => {
+        if (scrollTop >= section.offsetTop - 100) {
+            currentSection = section;
+        }
+    });
+
+    if (currentSection) {
+        // 根据栏目类型决定导航栏背景（Deep/Shallow）
+        const isDeep = currentSection.classList.contains('hero') ||
+                       currentSection.classList.contains('screenshots') ||
+                       currentSection.classList.contains('feedback');
+        navbar.style.backgroundColor = isDeep ? 'var(--section-deep)' : 'var(--section-shallow)';
+
+        // 滚动时增加细微阴影
+        navbar.style.boxShadow = scrollTop > 20 ? '0 4px 12px rgba(0,0,0,0.1)' : 'none';
     }
-
-    lastScrollTop = scrollTop;
-});
+}
 
 // ============================================
 // 菜单链接活跃状态
 // ============================================
 function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+    const allSections = document.querySelectorAll('section[id], .hero');
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    let currentId = '';
 
-    window.addEventListener('scroll', () => {
-        let current = '';
+    allSections.forEach(section => {
+        if (scrollTop >= section.offsetTop - 100) {
+            currentId = section.getAttribute('id') || '';
+        }
+    });
 
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (pageYOffset >= sectionTop - 200) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
-        });
+    document.querySelectorAll('.nav-menu a[href^="#"]').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentId}`) {
+            link.classList.add('active');
+        }
     });
 }
 
-updateActiveNavLink();
+// ============================================
+// 初始化
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    initializeTheme();
 
-// 添加活跃链接样式
-const activeStyle = document.createElement('style');
-activeStyle.textContent = `
-    .nav-menu a.active {
-        color: var(--primary);
-        border-bottom: 3px solid var(--primary);
-        padding-bottom: 2px;
+    // 绑定主题切换
+    if (themeToggle) {
+        themeToggle.addEventListener('click', (e) => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
     }
-`;
-document.head.appendChild(activeStyle);
+
+    // 统一处理滚动监听
+    window.addEventListener('scroll', () => {
+        updateNavbarAppearance();
+        updateActiveNavLink();
+    }, { passive: true });
+
+    // 锚点跳转拦截
+    document.addEventListener('click', (e) => {
+        // 查找最近的 a 标签
+        const anchor = e.target.closest('a[href^="#"]');
+        if (!anchor) return;
+
+        const targetId = anchor.getAttribute('href');
+        if (targetId === '#' || !targetId) return;
+
+        const target = document.querySelector(targetId);
+        if (target) {
+            e.preventDefault();
+            // 使用标准的 scrollIntoView，它会尊重 CSS 的 scroll-margin-top
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+
+            // 更新 URL hash
+            history.pushState(null, null, targetId);
+        }
+    });
+
+    // Logo 点击回顶
+    const brand = document.querySelector('.nav-brand');
+    if (brand) {
+        brand.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            history.pushState(null, null, '#hero');
+        });
+    }
+
+    // 初次运行同步状态
+    updateNavbarAppearance();
+    updateActiveNavLink();
+});

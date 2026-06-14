@@ -8,6 +8,19 @@
     <meta name="description"
         content="oSamu - A cross-platform EPUB reader based on Readium with MD3 UI, multiple themes and multilingual support">
     <link rel="stylesheet" href="css/style.css">
+    <script type="importmap">
+        {
+          "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+          }
+        }
+    </script>
+    <script type="module">
+        import '@material/web/all.js';
+        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
     <script src="js/i18n.js"></script>
 </head>
 
@@ -20,6 +33,7 @@
                 <span>oSamu</span>
             </div>
             <div class="nav-menu">
+                <a href="#hero" data-i18n="nav.home">首页</a>
                 <a href="#features" data-i18n="nav.features">功能</a>
                 <a href="#screenshots" data-i18n="nav.screenshots">截图</a>
                 <a href="#download" data-i18n="nav.download">下载</a>
@@ -27,23 +41,23 @@
 
                 <!-- 语言切换 -->
                 <div class="language-selector">
-                    <button class="lang-toggle" id="langToggle" title="Language">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    <md-icon-button id="langToggle" title="Language">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <circle cx="12" cy="12" r="10"></circle>
                             <path
                                 d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
                             </path>
                         </svg>
-                    </button>
+                    </md-icon-button>
                     <div class="lang-menu" id="langMenu">
                         <button class="lang-option" data-lang="zh">中文 (Chinese)</button>
                         <button class="lang-option" data-lang="en">English</button>
                     </div>
                 </div>
 
-                <button class="theme-toggle" id="themeToggle" data-i18n-title="nav.toggle-theme" title="切换主题">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <md-icon-button id="themeToggle" data-i18n-title="nav.toggle-theme" title="切换主题">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
                         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -54,19 +68,19 @@
                         <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
-                </button>
+                </md-icon-button>
             </div>
         </div>
     </nav>
 
     <!-- 英雄区 -->
-    <section class="hero">
+    <section id="hero" class="hero">
         <div class="container">
             <img src="src/icon/ic_launcher_round.webp" alt="oSamu" class="hero-icon">
             <h1>oSamu</h1>
             <p class="hero-subtitle" data-i18n="hero.subtitle">现代化的EPUB阅读体验</p>
             <p class="hero-description" data-i18n="hero.description">基于Readium的跨平台EPUB阅读器，优雅的界面设计，强大的阅读功能</p>
-            <a href="#download" class="btn btn-primary" data-i18n="hero.download">立即下载</a>
+            <md-filled-button href="#download" data-i18n="hero.download">立即下载</md-filled-button>
         </div>
     </section>
 
@@ -118,7 +132,6 @@
                 <img src="src/Screenshots/Screenshot_2026-06-14-01-39-36-31.png" alt="oSamu 截图 2" class="screenshot">
                 <img src="src/Screenshots/Screenshot_2026-06-14-01-40-24-08.png" alt="oSamu 截图 3" class="screenshot">
                 <img src="src/Screenshots/Screenshot_2026-06-14-02-10-55-63.png" alt="oSamu 截图 4" class="screenshot">
-                <img src="src/Screenshots/Screenshot_2026-06-14-02-11-32-22.png" alt="oSamu 截图 5" class="screenshot">
             </div>
         </div>
     </section>
@@ -129,14 +142,12 @@
             <h2 data-i18n="download.title">下载应用</h2>
             <p data-i18n="download.subtitle">选择适合您的平台</p>
             <div class="download-buttons">
-                <a href="https://github.com/LoKaisham/oSamu-Release/releases" class="btn btn-primary btn-large">
+                <md-filled-button href="https://github.com/LoKaisham/oSamu-Release/releases">
                     <span data-i18n="download.apk-btn">📥 下载APK</span>
-                    <small data-i18n="download.apk-sub">从GitHub Releases</small>
-                </a>
-                <a href="https://github.com/LoKaisham/oSamu-Release" class="btn btn-secondary btn-large">
+                </md-filled-button>
+                <md-outlined-button href="https://github.com/LoKaisham/oSamu-Release">
                     <span data-i18n="download.github-btn">⭐ GitHub</span>
-                    <small data-i18n="download.github-sub">查看项目</small>
-                </a>
+                </md-outlined-button>
             </div>
         </div>
     </section>
@@ -147,22 +158,22 @@
             <h2 data-i18n="feedback.title">反馈与建议</h2>
             <div class="feedback-content">
                 <div class="feedback-card">
+                    <md-elevation></md-elevation>
                     <h3 data-i18n="feedback.issue-title">🐛 报告问题</h3>
                     <p data-i18n="feedback.issue-desc">如果您发现任何问题或BUG，欢迎在GitHub上提交Issue</p>
-                    <a href="https://github.com/LoKaisham/oSamu-Release/issues" class="btn btn-outline"
-                        data-i18n="feedback.issue-btn">提交Issue</a>
+                    <md-text-button href="https://github.com/LoKaisham/oSamu-Release/issues" data-i18n="feedback.issue-btn">提交Issue</md-text-button>
                 </div>
                 <div class="feedback-card">
+                    <md-elevation></md-elevation>
                     <h3 data-i18n="feedback.suggest-title">💡 功能建议</h3>
                     <p data-i18n="feedback.suggest-desc">您有什么想法或建议？我们非常期待听到您的意见</p>
-                    <a href="https://github.com/LoKaisham/oSamu-Release/discussions" class="btn btn-outline"
-                        data-i18n="feedback.suggest-btn">讨论区</a>
+                    <md-text-button href="https://github.com/LoKaisham/oSamu-Release/discussions" data-i18n="feedback.suggest-btn">讨论区</md-text-button>
                 </div>
                 <div class="feedback-card">
+                    <md-elevation></md-elevation>
                     <h3 data-i18n="feedback.sponsor-title">❤️ 赞助支持</h3>
                     <p data-i18n="feedback.sponsor-desc">如果您喜欢这个应用，可以通过赞助来支持开发</p>
-                    <a href="https://github.com/sponsors/LoKaisham" class="btn btn-outline"
-                        data-i18n="feedback.sponsor-btn">赞助我们</a>
+                    <md-text-button href="https://github.com/sponsors/LoKaisham" data-i18n="feedback.sponsor-btn">赞助我们</md-text-button>
                 </div>
             </div>
         </div>
