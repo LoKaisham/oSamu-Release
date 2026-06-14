@@ -131,12 +131,12 @@ function handleScreenshotWheel(e) {
 
     if (isAnimating) return;
 
-    if (e.deltaY > 0 && currentScreenshotIdx < items.length - 1) {
-        currentScreenshotIdx++;
+    if (e.deltaY > 0) {
+        currentScreenshotIdx = (currentScreenshotIdx + 1) % items.length;
         performTransition();
         e.preventDefault();
-    } else if (e.deltaY < 0 && currentScreenshotIdx > 0) {
-        currentScreenshotIdx--;
+    } else if (e.deltaY < 0) {
+        currentScreenshotIdx = (currentScreenshotIdx - 1 + items.length) % items.length;
         performTransition();
         e.preventDefault();
     }
@@ -152,10 +152,9 @@ function performTransition() {
 function updateNavButtons() {
     const prevBtn = document.getElementById('screenshotPrev');
     const nextBtn = document.getElementById('screenshotNext');
-    const items = document.querySelectorAll('.screenshot-item');
 
-    if (prevBtn) prevBtn.disabled = (currentScreenshotIdx === 0);
-    if (nextBtn) nextBtn.disabled = (currentScreenshotIdx === items.length - 1);
+    if (prevBtn) prevBtn.disabled = false;
+    if (nextBtn) nextBtn.disabled = false;
 }
 
 // ================= ===========================
@@ -218,19 +217,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.getElementById('screenshotNext');
     if (prevBtn) {
         prevBtn.addEventListener('click', () => {
-            if (currentScreenshotIdx > 0) {
-                currentScreenshotIdx--;
-                performTransition();
-            }
+            const items = document.querySelectorAll('.screenshot-item');
+            currentScreenshotIdx = (currentScreenshotIdx - 1 + items.length) % items.length;
+            performTransition();
         });
     }
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
             const items = document.querySelectorAll('.screenshot-item');
-            if (currentScreenshotIdx < items.length - 1) {
-                currentScreenshotIdx++;
-                performTransition();
-            }
+            currentScreenshotIdx = (currentScreenshotIdx + 1) % items.length;
+            performTransition();
         });
     }
 });
