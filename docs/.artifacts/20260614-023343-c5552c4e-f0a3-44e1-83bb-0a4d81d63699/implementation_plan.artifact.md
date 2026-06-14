@@ -1,33 +1,21 @@
-# 为网页和 README 添加英语支持
+# 分离多语言 README 文件
 
-为官网实现多语言切换功能（中/英），并将 `README.md` 更新为中英双语版本。
+为了保持文档简洁且内容完整，将中英文内容拆分为独立的文件。按照 GitHub 通用惯例，主 `README.md` 使用英文，中文内容移动至 `README.zh.md`。
 
 ## Proposed Changes
 
-### 网页国际化 (i18n)
-
-#### [index.html](file:///C:/Android/oSamuRelease/docs/index.html)
-- 引入 `js/i18n.js`。
-- 在导航栏添加语言切换按钮。
-- 为需要翻译的元素添加 `data-i18n` 属性。
-
-#### [NEW] [i18n.js](file:///C:/Android/oSamuRelease/docs/js/i18n.js)
-- 定义中英文对照表。
-- 实现语言切换逻辑，并持久化到 `localStorage`。
-
-#### [style.css](file:///C:/Android/oSamuRelease/docs/css/style.css)
-- 添加语言切换按钮的样式。
-
----
-
-### README 更新
+### README 分离
 
 #### [README.md](file:///C:/Android/oSamuRelease/README.md)
-- 将内容重构为中英双语版本，方便全球用户阅读。
+- 仅保留完整的英文内容。
+- 在顶部添加明显的中文版链接：`[中文版](README.zh.md)`。
+
+#### [NEW] [README.zh.md](file:///C:/Android/oSamuRelease/README.zh.md)
+- 包含完整的中文内容。
+- 在顶部添加明显的英文版链接：`[English](README.md)`。
 
 ## Verification Plan
 
 ### Manual Verification
-- 打开 `index.html`，点击语言切换按钮，验证文字是否正确切换。
-- 刷新页面，验证语言选择是否被保留。
-- 检查 `README.md` 的双语排版是否整洁。
+- 在 GitHub 界面（或本地预览）检查两个文件的链接是否可以正确相互跳转。
+- 确认两个文件的内容均完整，没有任何精简。
