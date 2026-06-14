@@ -43,7 +43,7 @@ function updateThemeIcon(theme) {
 }
 
 // ============================================
-// 导航栏动态变色
+// 导航栏外观逻辑 (背景颜色与阴影)
 // ============================================
 const navbar = document.querySelector('.navbar');
 
@@ -53,7 +53,7 @@ function updateNavbarAppearance() {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     let currentSection = null;
 
-    // 在普通文档流中，从前往后找最后一个其顶部已经过线的
+    // 遍历所有栏目，找到当前视口内的栏目
     allSections.forEach(section => {
         if (scrollTop >= section.offsetTop - 100) {
             currentSection = section;
@@ -73,7 +73,7 @@ function updateNavbarAppearance() {
 }
 
 // ============================================
-// 菜单链接活跃状态
+// 菜单活跃状态同步
 // ============================================
 function updateActiveNavLink() {
     const allSections = document.querySelectorAll('section[id], .hero');
@@ -81,7 +81,7 @@ function updateActiveNavLink() {
     let currentId = '';
 
     allSections.forEach(section => {
-        if (scrollTop >= section.offsetTop - 100) {
+        if (scrollTop >= section.offsetTop - 120) {
             currentId = section.getAttribute('id') || '';
         }
     });
@@ -95,18 +95,85 @@ function updateActiveNavLink() {
 }
 
 // ============================================
-// 初始化
+// 截图展示 3D 轮播 (单页滚轮控制)
+// ============================================
+let currentScreenshotIdx = 0;
+let isAnimating = false;
+
+function updateScreenshots3D(index) {
+    const items = document.querySelectorAll('.screenshot-item');
+    if (items.length === 0) return;
+
+    items.forEach((item, i) => {
+        item.classList.remove('active', 'prev', 'next', 'far-prev', 'far-next');
+
+        if (i === index) {
+            item.classList.add('active');
+        } else if (i === index - 1) {
+            item.classList.add('prev');
+        } else if (i === index + 1) {
+            item.classList.add('next');
+        } else if (i < index - 1) {
+            item.classList.add('far-prev');
+        } else if (i > index + 1) {
+            item.classList.add('far-next');
+        }
+    });
+}
+
+function handleScreenshotWheel(e) {
+    const section = document.querySelector('.screenshots');
+    const items = document.querySelectorAll('.screenshot-item');
+
+    // 只有当鼠标在截图区域内时才触发
+    const rect = section.getBoundingClientRect();
+    if (rect.top > 50 || rect.bottom < window.innerHeight - 50) return;
+
+    if (isAnimating) return;
+
+    if (e.deltaY > 0 && currentScreenshotIdx < items.length - 1) {
+        currentScreenshotIdx++;
+        performTransition();
+        e.preventDefault();
+    } else if (e.deltaY < 0 && currentScreenshotIdx > 0) {
+        currentScreenshotIdx--;
+        performTransition();
+        e.preventDefault();
+    }
+}
+
+function performTransition() {
+    isAnimating = true;
+    updateScreenshots3D(currentScreenshotIdx);
+    updateNavButtons();
+    setTimeout(() => { isAnimating = false; }, 600);
+}
+
+function updateNavButtons() {
+    const prevBtn = document.getElementById('screenshotPrev');
+    const nextBtn = document.getElementById('screenshotNext');
+    const items = document.querySelectorAll('.screenshot-item');
+
+    if (prevBtn) prevBtn.disabled = (currentScreenshotIdx === 0);
+    if (nextBtn) nextBtn.disabled = (currentScreenshotIdx === items.length - 1);
+}
+
+// ================= ===========================
+// 页面交互初始化
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
     initializeTheme();
 
     // 绑定主题切换
     if (themeToggle) {
-        themeToggle.addEventListener('click', (e) => {
+        themeToggle.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
             setTheme(currentTheme === 'dark' ? 'light' : 'dark');
         });
     }
+
+    // 滚轮监听 (截图专用)
+    window.addEventListener('wheel', handleScreenshotWheel, { passive: false });
 
     // 统一处理滚动监听
     window.addEventListener('scroll', () => {
@@ -116,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 锚点跳转拦截
     document.addEventListener('click', (e) => {
-        // 查找最近的 a 标签
         const anchor = e.target.closest('a[href^="#"]');
         if (!anchor) return;
 
@@ -126,12 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const target = document.querySelector(targetId);
         if (target) {
             e.preventDefault();
-            // 使用标准的 scrollIntoView，它会尊重 CSS 的 scroll-margin-top
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
-
-            // 更新 URL hash
+            // 使用标准的 scrollIntoView，配合 CSS scroll-margin-top 实现精准跳转
+            target.scrollIntoView({ behavior: 'smooth' });
             history.pushState(null, null, targetId);
         }
     });
@@ -145,7 +207,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 初次运行同步状态
+    // 初始状态同步
     updateNavbarAppearance();
     updateActiveNavLink();
+    updateScreenshots3D(0);
+    updateNavButtons();
+
+    // 绑定导航按钮
+    const prevBtn = document.getElementById('screenshotPrev');
+    const nextBtn = document.getElementById('screenshotNext');
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            if (currentScreenshotIdx > 0) {
+                currentScreenshotIdx--;
+                performTransition();
+            }
+        });
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            const items = document.querySelectorAll('.screenshot-item');
+            if (currentScreenshotIdx < items.length - 1) {
+                currentScreenshotIdx++;
+                performTransition();
+            }
+        });
+    }
 });
